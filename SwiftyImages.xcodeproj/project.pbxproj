@@ -116,11 +116,11 @@
 		4391E3221DB920CD003A567B /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4391E3231DB920CD003A567B /* CGContext+Extensions.swift */,
+				4391E3241DB920CD003A567B /* CGImage+Extensions.swift */,
 				43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */,
 				43581BF91DB947C80008A989 /* CGRect+Extensions.swift */,
 				43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */,
-				4391E3231DB920CD003A567B /* CGContext+Extensions.swift */,
-				4391E3241DB920CD003A567B /* CGImage+Extensions.swift */,
 				4391E3251DB920CD003A567B /* String+Extensions.swift */,
 				4391E3261DB920CD003A567B /* UIImage+Blurring.swift */,
 				4391E3271DB920CD003A567B /* UIImage+Filtering.swift */,
