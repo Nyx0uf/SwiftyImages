@@ -135,4 +135,40 @@ public extension UIImage
 
 		return UIImage(cgImage: rotatedImageRef, scale: self.scale, orientation: self.imageOrientation)
 	}
+
+	public func reflected(height: Int = 0, fromAlpha: CGFloat = 1.0, toAlpha: CGFloat = 0.0) -> UIImage?
+	{
+		guard let cgImage = self.cgImage else
+		{
+			return nil
+		}
+
+		var h = height
+		let width = Int(self.size.width)
+		if h <= 0
+		{
+			h = Int(self.size.height)
+			return nil
+		}
+
+		UIGraphicsBeginImageContextWithOptions(CGSize(width, height), false, 0.0)
+		guard let mainViewContentContext = UIGraphicsGetCurrentContext() else
+		{
+			return nil
+		}
+
+		guard let gradientMaskImage = CGImage.makeGrayGradient(width: 1, height: h, fromAlpha: fromAlpha, toAlpha: toAlpha) else
+		{
+			return nil
+		}
+
+		mainViewContentContext.clip(to: CGRect(0, 0, width, h), mask: gradientMaskImage)
+		mainViewContentContext.draw(cgImage, in: CGRect(0, 0, width, Int(self.size.height)))
+
+		let theImage = UIGraphicsGetImageFromCurrentImageContext()
+
+		UIGraphicsEndImageContext()
+
+		return theImage
+	}
 }

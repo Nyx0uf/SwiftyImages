@@ -24,7 +24,6 @@
 		4391E3381DB920CD003A567B /* UIImage+Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3271DB920CD003A567B /* UIImage+Filtering.swift */; };
 		4391E3391DB920CD003A567B /* UIImage+Masking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3281DB920CD003A567B /* UIImage+Masking.swift */; };
 		4391E33A1DB920CD003A567B /* UIImage+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3291DB920CD003A567B /* UIImage+Misc.swift */; };
-		4391E33B1DB920CD003A567B /* UIImage+Reflecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32A1DB920CD003A567B /* UIImage+Reflecting.swift */; };
 		4391E33C1DB920CD003A567B /* UIImage+Resizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */; };
 		4391E33D1DB920CD003A567B /* UIImage+Rotating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */; };
 		4391E33E1DB920CD003A567B /* UIImage+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32D1DB920CD003A567B /* UIImage+Saving.swift */; };
@@ -54,7 +53,6 @@
 		4391E3271DB920CD003A567B /* UIImage+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Filtering.swift"; sourceTree = "<group>"; };
 		4391E3281DB920CD003A567B /* UIImage+Masking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Masking.swift"; sourceTree = "<group>"; };
 		4391E3291DB920CD003A567B /* UIImage+Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Misc.swift"; sourceTree = "<group>"; };
-		4391E32A1DB920CD003A567B /* UIImage+Reflecting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Reflecting.swift"; sourceTree = "<group>"; };
 		4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resizing.swift"; sourceTree = "<group>"; };
 		4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotating.swift"; sourceTree = "<group>"; };
 		4391E32D1DB920CD003A567B /* UIImage+Saving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Saving.swift"; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				4391E3271DB920CD003A567B /* UIImage+Filtering.swift */,
 				4391E3281DB920CD003A567B /* UIImage+Masking.swift */,
 				4391E3291DB920CD003A567B /* UIImage+Misc.swift */,
-				4391E32A1DB920CD003A567B /* UIImage+Reflecting.swift */,
 				4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */,
 				4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */,
 				4391E32D1DB920CD003A567B /* UIImage+Saving.swift */,
@@ -238,7 +235,6 @@
 				4391E3361DB920CD003A567B /* String+Extensions.swift in Sources */,
 				43581BFD1DB947C80008A989 /* CGSize+Extensions.swift in Sources */,
 				430912D51DBA1988004AE8FA /* CountedObject.swift in Sources */,
-				4391E33B1DB920CD003A567B /* UIImage+Reflecting.swift in Sources */,
 				430912D11DBA1532004AE8FA /* Common.swift in Sources */,
 				4391E3331DB920CD003A567B /* NYXProgressiveImageView.swift in Sources */,
 				430912D71DBA1BBC004AE8FA /* Pixel.swift in Sources */,
