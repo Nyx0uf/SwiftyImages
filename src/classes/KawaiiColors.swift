@@ -64,19 +64,19 @@ public final class KawaiiColors
 
 	public convenience init(image: UIImage, precision: Int)
 	{
-		self.init(image:image)
-		self.precision = clamp(precision, lower:8, upper:256)
+		self.init(image: image)
+		self.precision = clamp(precision, lower: 8, upper: 256)
 	}
 
 	public convenience init(image: UIImage, samplingEdge: SamplingEdge)
 	{
-		self.init(image:image)
+		self.init(image: image)
 		self.samplingEdge = samplingEdge
 	}
 
 	public convenience init(image: UIImage, precision: Int, samplingEdge: SamplingEdge)
 	{
-		self.init(image:image, precision:precision)
+		self.init(image: image, precision: precision)
 		self.samplingEdge = samplingEdge
 	}
 
@@ -169,15 +169,15 @@ public final class KawaiiColors
 					var count = rawImageColors[r][g][b]
 					if count > __threshold
 					{
-						let color = UIColor(red:CGFloat(r) / ppf, green:CGFloat(g) / ppf, blue:CGFloat(b) / ppf, alpha:1.0)
-						colors.append(CountedObject(object:color, count:count))
+						let color = UIColor(red: CGFloat(r) / ppf, green: CGFloat(g) / ppf, blue: CGFloat(b) / ppf, alpha: 1.0)
+						colors.append(CountedObject(object: color, count: count))
 					}
 
 					count = rawEdgeColors[r][g][b]
 					if count > __threshold
 					{
-						let color = UIColor(red:CGFloat(r) / ppf, green:CGFloat(g) / ppf, blue:CGFloat(b) / ppf, alpha:1.0)
-						edgeColors.append(CountedObject(object:color, count:count))
+						let color = UIColor(red: CGFloat(r) / ppf, green: CGFloat(g) / ppf, blue: CGFloat(b) / ppf, alpha: 1.0)
+						edgeColors.append(CountedObject(object: color, count: count))
 					}
 				}
 			}
@@ -236,7 +236,7 @@ public final class KawaiiColors
 			if cc.isDark() == findDarkTextColor
 			{
 				let colorCount = countedColor.count
-				sortedColors.append(CountedObject(object:cc, count:colorCount))
+				sortedColors.append(CountedObject(object: cc, count: colorCount))
 			}
 		}
 
