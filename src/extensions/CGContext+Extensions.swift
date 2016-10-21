@@ -23,14 +23,6 @@
 import UIKit
 
 
-// MARK: - Public constants
-public let numberOfComponentsPerARBGPixel = 4
-public let numberOfComponentsPerRGBAPixel = 4
-public let numberOfComponentsPerGrayPixel = 3
-public let minPixelComponentValue = UInt8(0)
-public let maxPixelComponentValue = UInt8(255)
-
-
 public extension CGContext
 {
 	// MARK: - ARGB bitmap context

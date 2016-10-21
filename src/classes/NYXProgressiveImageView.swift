@@ -103,7 +103,7 @@ public class NYXProgressiveImageView : UIImageView
 	}
 
 	// MARK: - Public
-	public func loadImageAtURL(_ url: URL)
+	public func loadImage(atUrl url: URL)
 	{
 		if isDownloading
 		{
@@ -160,12 +160,12 @@ public class NYXProgressiveImageView : UIImageView
 		try! FileManager.default.removeItem(at: cachesDirectoryURL.appendingPathComponent(imageName))
 	}
 
-	fileprivate func createTransitoryImage(partialImage: CGImage) -> CGImage?
+	fileprivate func createTransitoryImage(fromPartialImage image: CGImage) -> CGImage?
 	{
-		guard let bmContext = CGContext.ARGBBitmapContext(width: _imageWidth, height: _imageHeight, withAlpha: partialImage.hasAlpha()) else {return nil}
+		guard let bmContext = CGContext.ARGBBitmapContext(width: _imageWidth, height: _imageHeight, withAlpha: image.hasAlpha()) else {return nil}
 
-		let partialHeight = partialImage.height
-		bmContext.draw(partialImage, in: CGRect(0, 0, _imageWidth, partialHeight))
+		let partialHeight = image.height
+		bmContext.draw(image, in: CGRect(0, 0, _imageWidth, partialHeight))
 		return bmContext.makeImage()
 	}
 }
@@ -196,7 +196,7 @@ extension NYXProgressiveImageView : URLSessionDelegate
 		{
 			guard let cgImage = CGImageSourceCreateImageAtIndex(_imageSource, 0, nil) else {return}
 
-			if let imgTmp = self.createTransitoryImage(partialImage: cgImage)
+			if let imgTmp = self.createTransitoryImage(fromPartialImage: cgImage)
 			{
 				let img = UIImage(cgImage: imgTmp, scale: 1.0, orientation: _imageOrientation)
 				DispatchQueue.main.async {
@@ -221,7 +221,7 @@ extension NYXProgressiveImageView : URLSessionDelegate
 
 				if let orientPtr = dic[kCGImagePropertyOrientation] as! NSNumber?
 				{
-					_imageOrientation = NYXProgressiveImageView.exifOrientationToiOSOrientation(orientPtr.intValue)
+					_imageOrientation = exifOrientationToUIImageOrientation(orientPtr.intValue)
 				}
 				else
 				{
@@ -280,38 +280,11 @@ extension NYXProgressiveImageView
 		return cachesDirectoryURL.appendingPathComponent("ProgressiveImageViewCache", isDirectory: true)
 	}
 
-	public class func resetImageCache()
+	public class func resetCache()
 	{
 		if let url = NYXProgressiveImageView.cachesDirectoryURL()
 		{
 			try! FileManager.default.removeItem(at: url)
 		}
-	}
-
-	public class func exifOrientationToiOSOrientation(_ exifOrientation: Int) -> UIImageOrientation
-	{
-		var orientation: UIImageOrientation = .up
-		switch (exifOrientation)
-		{
-		case 1:
-			orientation = .up
-		case 3:
-			orientation = .down
-		case 8:
-			orientation = .left
-		case 6:
-			orientation = .right
-		case 2:
-			orientation = .upMirrored
-		case 4:
-			orientation = .downMirrored
-		case 5:
-			orientation = .leftMirrored
-		case 7:
-			orientation = .rightMirrored
-		default:
-			orientation = .up
-		}
-		return orientation
 	}
 }
