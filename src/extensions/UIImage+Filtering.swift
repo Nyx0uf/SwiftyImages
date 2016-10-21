@@ -409,7 +409,7 @@ public extension UIImage
 		// Preserve alpha channel by creating context with 'alpha only' values
 		// and using it as a mask for previously generated `grayscaledImageRef`
 		// based on: http://incurlybraces.com/convert-transparent-image-to-grayscale-in-ios.html
-		guard let bmContext2 = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: cgImage.colorSpace!, bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue) else
+		guard let bmContext2 = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue) else
 		{
 			return nil
 		}
