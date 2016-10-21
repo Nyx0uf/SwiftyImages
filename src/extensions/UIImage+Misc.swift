@@ -48,9 +48,27 @@ public extension UIImage
 
 	public func tinted(withColor color: UIColor, opacity: CGFloat = 0.0) -> UIImage?
 	{
-		let renderer = UIGraphicsImageRenderer(size: size)
-		return renderer.image() { rendererContext in
-			let rect = CGRect(CGPoint.zero, self.size)
+		if #available(iOS 10, *)
+		{
+			let renderer = UIGraphicsImageRenderer(size: size)
+			return renderer.image() { rendererContext in
+				let rect = CGRect(0.0, 0.0, self.size.width, self.size.height)
+				color.set()
+				UIRectFill(rect)
+
+				draw(in: rect, blendMode: .destinationIn, alpha: 1.0)
+
+				if (opacity > 0.0)
+				{
+					draw(in: rect, blendMode: .sourceAtop, alpha: opacity)
+				}
+			}
+		}
+		else
+		{
+			UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
+			let rect = CGRect(0.0, 0.0, size.width, size.height)
 			color.set()
 			UIRectFill(rect)
 
@@ -60,6 +78,10 @@ public extension UIImage
 			{
 				draw(in: rect, blendMode: .sourceAtop, alpha: opacity)
 			}
+			let image = UIGraphicsGetImageFromCurrentImageContext()
+			UIGraphicsEndImageContext()
+
+			return image
 		}
 	}
 }

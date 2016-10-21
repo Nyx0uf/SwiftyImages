@@ -119,6 +119,11 @@ public extension UIImage
 
 	func smartCropped(toSize: CGSize) -> UIImage?
 	{
+		guard let cgImage = self.cgImage else
+		{
+			return nil
+		}
+
 		let sourceWidth = size.width * scale
 		let sourceHeight = size.height * scale
 		let targetWidth = toSize.width
@@ -154,11 +159,30 @@ public extension UIImage
 		let sourceRect = CGRect(ceil(destX / scaleFactor), destY / scaleFactor, targetWidth / scaleFactor, targetHeight / scaleFactor).integral
 
 		// Create scale-cropped image
-		let renderer = UIGraphicsImageRenderer(size: destRect.size)
-		return renderer.image() { rendererContext in
-			let sourceImg = cgImage?.cropping(to: sourceRect) // cropping happens here
-			let image = UIImage(cgImage:sourceImg!, scale:0.0, orientation:imageOrientation)
+		if #available(iOS 10, *)
+		{
+			let renderer = UIGraphicsImageRenderer(size: destRect.size)
+			return renderer.image() { rendererContext in
+				guard let sourceImg = cgImage.cropping(to: sourceRect) else // cropping happens here
+				{
+					return
+				}
+				let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: imageOrientation)
+				image.draw(in: destRect) // the actual scaling happens here, and orientation is taken care of automatically
+			}
+		}
+		else
+		{
+			UIGraphicsBeginImageContextWithOptions(destRect.size, false, 0.0) // 0.0 = scale for device's main screen
+			guard let sourceImg = cgImage.cropping(to: sourceRect) else // cropping happens here
+			{
+				return nil
+			}
+			let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: imageOrientation)
 			image.draw(in: destRect) // the actual scaling happens here, and orientation is taken care of automatically
+			let final = UIGraphicsGetImageFromCurrentImageContext()
+			UIGraphicsEndImageContext()
+			return final
 		}
 	}
 
