@@ -23,14 +23,9 @@
 import UIKit
 
 
+// MARK: - Image generators
 public extension CGImage
 {
-	public func hasAlpha() -> Bool
-	{
-		let alpha = self.alphaInfo
-		return (alpha == .first || alpha == .last || alpha == .premultipliedFirst || alpha == .premultipliedLast);
-	}
-
 	public class func makeGrayGradient(width: Int, height: Int, fromAlpha: CGFloat, toAlpha: CGFloat) -> CGImage?
 	{
 		guard let gradientBitmapContext = CGContext.GrayBitmapContext(width: width, height: height) else
@@ -49,5 +44,51 @@ public extension CGImage
 		gradientBitmapContext.drawLinearGradient(grayScaleGradient, start: CGPoint.zero, end: CGPoint(x: 0, y: height), options: [.drawsAfterEndLocation])
 
 		return gradientBitmapContext.makeImage()
+	}
+
+	public class func makeFromString(_ string: String, font: UIFont, fontColor: UIColor, backgroundColor: UIColor, maxSize: CGSize) -> CGImage?
+	{
+		// Create an attributed string with string and font information
+		let paragraphStyle = NSMutableParagraphStyle()
+		paragraphStyle.lineBreakMode = .byWordWrapping
+		paragraphStyle.alignment = .center
+		let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : fontColor, NSParagraphStyleAttributeName : paragraphStyle]
+		let attrString = NSAttributedString(string:string, attributes:attributes)
+		let scale = UIScreen.main.scale
+		let trueMaxSize = maxSize * scale
+
+		// Figure out how big an image we need
+		let framesetter = CTFramesetterCreateWithAttributedString(attrString)
+		var osef = CFRange(location:0, length:0)
+		let goodSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, osef, nil, trueMaxSize, &osef).ceilled()
+		let rect = CGRect((trueMaxSize.width - goodSize.width) * 0.5, (trueMaxSize.height - goodSize.height) * 0.5, goodSize.width, goodSize.height)
+		let path = CGPath(rect: rect, transform: nil)
+		let frame = CTFramesetterCreateFrame(framesetter, CFRange(location:0, length:0), path, nil)
+
+		// Create the context and fill it
+		guard let bmContext = CGContext.ARGBBitmapContext(width:Int(trueMaxSize.width), height:Int(trueMaxSize.height), withAlpha:true) else
+		{
+			return nil
+		}
+		bmContext.setFillColor(backgroundColor.cgColor)
+		bmContext.fill(CGRect(CGPoint.zero, trueMaxSize))
+
+		// Draw the text
+		bmContext.setAllowsAntialiasing(true)
+		bmContext.setAllowsFontSmoothing(true)
+		bmContext.interpolationQuality = .high
+		CTFrameDraw(frame, bmContext)
+
+		return bmContext.makeImage()
+	}
+}
+
+// MARK: -
+public extension CGImage
+{
+	public func hasAlpha() -> Bool
+	{
+		let alphaInfo = self.alphaInfo
+		return (alphaInfo == .first || alphaInfo == .last || alphaInfo == .premultipliedFirst || alphaInfo == .premultipliedLast)
 	}
 }
