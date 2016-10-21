@@ -165,7 +165,7 @@ public class NYXProgressiveImageView : UIImageView
 		guard let bmContext = CGContext.ARGBBitmapContext(width: _imageWidth, height: _imageHeight, withAlpha: partialImage.hasAlpha()) else {return nil}
 
 		let partialHeight = partialImage.height
-		bmContext.draw(partialImage, in: CGRect(x: 0, y: 0, width: _imageWidth, height: partialHeight))
+		bmContext.draw(partialImage, in: CGRect(0, 0, _imageWidth, partialHeight))
 		return bmContext.makeImage()
 	}
 }

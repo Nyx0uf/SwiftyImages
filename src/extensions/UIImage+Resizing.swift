@@ -108,7 +108,7 @@ public extension UIImage
 		}
 
 		// Create the cropped image
-		let cropRect = CGRect(x: x * self.scale, y: y * self.scale, width: newSize.width * self.scale, height: newSize.height * self.scale)
+		let cropRect = CGRect(x * self.scale, y * self.scale, newSize.width * self.scale, newSize.height * self.scale)
 		guard let croppedImageRef = cgImage.cropping(to: cropRect) else
 		{
 			return nil
@@ -165,7 +165,7 @@ public extension UIImage
 	// MARK: - Scaling
 	public func scaled(factor: CGFloat) -> UIImage?
 	{
-		let scaledSize = CGSize(width: self.size.width * factor, height: self.size.height * factor)
+		let scaledSize = CGSize(self.size.width * factor, self.size.height * factor)
 		return self.scaleToFillSize(scaledSize)
 	}
 
@@ -219,7 +219,7 @@ public extension UIImage
 
 		// Draw the image in the bitmap context
 		UIGraphicsPushContext(bmContext)
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: destWidth, height: destHeight))
+		bmContext.draw(cgImage, in: CGRect(0, 0, destWidth, destHeight))
 		UIGraphicsPopContext()
 
 		// Create an image object from the context
@@ -256,7 +256,7 @@ public extension UIImage
 			destWidth = Int(self.size.width * scaleSize.height / self.size.height)
 		}
 
-		return self.scaleToFillSize(CGSize(width: destWidth, height: destHeight))
+		return self.scaleToFillSize(CGSize(destWidth, destHeight))
 	}
 
 	private func scaleToCoverSize(_ scaleSize: CGSize) -> UIImage?
@@ -277,6 +277,6 @@ public extension UIImage
 			destHeight = Int(self.size.height * scaleSize.width / self.size.width)
 		}
 
-		return self.scaleToFillSize(CGSize(width: destWidth, height: destHeight))
+		return self.scaleToFillSize(CGSize(destWidth, destHeight))
 	}
 }

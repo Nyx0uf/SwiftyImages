@@ -62,7 +62,7 @@ public extension UIImage
 		let width = cgImage.width
 		let height = cgImage.height
 
-		let rotatedRect = CGRect(x: 0, y: 0, width: width, height: height).applying(CGAffineTransform(rotationAngle: radians))
+		let rotatedRect = CGRect(0, 0, width, height).applying(CGAffineTransform(rotationAngle: radians))
 
 		guard let bmContext = CGContext.ARGBBitmapContext(width: Int(rotatedRect.size.width), height: Int(rotatedRect.size.height), withAlpha: true) else
 		{
@@ -82,7 +82,7 @@ public extension UIImage
 		bmContext.scaleBy(x: (flipOverHorizontalAxis ? -1.0 : 1.0), y: (flipOverVerticalAxis ? -1.0 : 1.0))
 
 		// Draw the image in the bitmap context
-		bmContext.draw(cgImage, in: CGRect(x: -(CGFloat(width) / 2.0), y: -(CGFloat(height) / 2.0), width: CGFloat(width), height: CGFloat(height)))
+		bmContext.draw(cgImage, in: CGRect(-(CGFloat(width) / 2.0), -(CGFloat(height) / 2.0), CGFloat(width), CGFloat(height)))
 
 		// Create an image object from the context
 		guard let resultImageRef = bmContext.makeImage() else
@@ -115,7 +115,7 @@ public extension UIImage
 		}
 
 		// Draw the image in the bitmap context
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 
 		// Grab the image raw data
 		guard let data = bmContext.data else

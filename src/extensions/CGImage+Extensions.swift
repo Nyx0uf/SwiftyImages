@@ -41,7 +41,7 @@ public extension CGImage
 		}
 
 		// Draw the gradient into the gray bitmap context
-		gradientBitmapContext.drawLinearGradient(grayScaleGradient, start: CGPoint.zero, end: CGPoint(x: 0, y: height), options: [.drawsAfterEndLocation])
+		gradientBitmapContext.drawLinearGradient(grayScaleGradient, start: CGPoint.zero, end: CGPoint(0, height), options: [.drawsAfterEndLocation])
 
 		return gradientBitmapContext.makeImage()
 	}

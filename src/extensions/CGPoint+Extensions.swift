@@ -32,6 +32,12 @@ public extension CGPoint
 		self.y = y
 	}
 
+	public init(_ x: Int, _ y: Int)
+	{
+		self.x = CGFloat(x)
+		self.y = CGFloat(y)
+	}
+
 	public func ceilled() -> CGPoint
 	{
 		return CGPoint(CoreGraphics.ceil(x), CoreGraphics.ceil(y))

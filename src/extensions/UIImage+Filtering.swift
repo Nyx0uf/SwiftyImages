@@ -86,7 +86,7 @@ public extension UIImage
 
 		// Set the alpha value and draw the image in the bitmap context
 		bmContext.setAlpha(value)
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 
 		guard let transparentImageRef = bmContext.makeImage() else
 		{
@@ -113,7 +113,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -172,7 +172,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -239,7 +239,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -280,7 +280,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -322,7 +322,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -397,7 +397,7 @@ public extension UIImage
 		bmContext.interpolationQuality = .high
 
 		// Draw the image in the bitmap context
-		let imageRect = CGRect(x: 0, y: 0, width: width, height: height)
+		let imageRect = CGRect(0, 0, width, height)
 		bmContext.draw(cgImage, in: imageRect)
 
 		// Create an image object from the context
@@ -442,7 +442,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -503,7 +503,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -590,7 +590,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil
@@ -631,7 +631,7 @@ public extension UIImage
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 		guard let data = bmContext.data else
 		{
 			return nil

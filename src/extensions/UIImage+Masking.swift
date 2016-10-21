@@ -52,7 +52,7 @@ public extension UIImage
 		}
 
 		// Draw the original image in the bitmap context
-		let r = CGRect(x: 0, y: 0, width: originalWidth, height: originalHeight)
+		let r = CGRect(0, 0, originalWidth, originalHeight)
 		bmContext.clip(to: r, mask: cgMaskImage)
 		bmContext.draw(cgImage, in: r)
 

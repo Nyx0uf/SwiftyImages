@@ -50,7 +50,7 @@ public extension UIImage
 	{
 		let renderer = UIGraphicsImageRenderer(size: size)
 		return renderer.image() { rendererContext in
-			let rect = CGRect(origin: CGPoint.zero, size: self.size)
+			let rect = CGRect(CGPoint.zero, self.size)
 			color.set()
 			UIRectFill(rect)
 

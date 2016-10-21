@@ -50,7 +50,7 @@ public extension UIImage
 			return nil
 		}
 
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+		bmContext.draw(cgImage, in: CGRect(0, 0, width, height))
 
 		guard let data = bmContext.data else
 		{

@@ -32,6 +32,12 @@ public extension CGSize
 		self.height = height
 	}
 
+	public init(_ width: Int, _ height: Int)
+	{
+		self.width = CGFloat(width)
+		self.height = CGFloat(height)
+	}
+
 	public func ceilled() -> CGSize
 	{
 		return CGSize(CoreGraphics.ceil(width), CoreGraphics.ceil(height))

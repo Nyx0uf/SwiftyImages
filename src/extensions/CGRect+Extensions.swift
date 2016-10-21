@@ -50,6 +50,12 @@ public extension CGRect
 		self.size = CGSize(width, height)
 	}
 
+	public init(_ x: Int, _ y: Int, _ width: Int, _ height: Int)
+	{
+		self.origin = CGPoint(x, y)
+		self.size = CGSize(width, height)
+	}
+
 	// MARK: - Shortcuts
 	public var x: CGFloat
 	{
