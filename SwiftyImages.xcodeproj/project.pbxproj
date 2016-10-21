@@ -10,6 +10,7 @@
 		43581BFB1DB947C80008A989 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */; };
 		43581BFC1DB947C80008A989 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BF91DB947C80008A989 /* CGRect+Extensions.swift */; };
 		43581BFD1DB947C80008A989 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */; };
+		43581BFF1DB95CF00008A989 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BFE1DB95CF00008A989 /* UIColor+Extensions.swift */; };
 		4391E3321DB920CD003A567B /* SwiftyImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 4391E31E1DB920CD003A567B /* SwiftyImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4391E3331DB920CD003A567B /* NYXProgressiveImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3211DB920CD003A567B /* NYXProgressiveImageView.swift */; };
 		4391E3341DB920CD003A567B /* CGContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3231DB920CD003A567B /* CGContext+Extensions.swift */; };
@@ -33,6 +34,7 @@
 		43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		43581BF91DB947C80008A989 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		43581BFE1DB95CF00008A989 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		4391E3101DB9209D003A567B /* SwiftyImages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyImages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4391E31C1DB920CD003A567B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4391E31E1DB920CD003A567B /* SwiftyImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyImages.h; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				43581BF91DB947C80008A989 /* CGRect+Extensions.swift */,
 				43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */,
 				4391E3251DB920CD003A567B /* String+Extensions.swift */,
+				43581BFE1DB95CF00008A989 /* UIColor+Extensions.swift */,
 				4391E3261DB920CD003A567B /* UIImage+Blurring.swift */,
 				4391E3271DB920CD003A567B /* UIImage+Filtering.swift */,
 				4391E3281DB920CD003A567B /* UIImage+Masking.swift */,
@@ -234,6 +237,7 @@
 				4391E33A1DB920CD003A567B /* UIImage+Misc.swift in Sources */,
 				4391E3381DB920CD003A567B /* UIImage+Filtering.swift in Sources */,
 				4391E33D1DB920CD003A567B /* UIImage+Rotating.swift in Sources */,
+				43581BFF1DB95CF00008A989 /* UIColor+Extensions.swift in Sources */,
 				4391E3371DB920CD003A567B /* UIImage+Blurring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
