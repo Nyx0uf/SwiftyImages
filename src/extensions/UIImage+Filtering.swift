@@ -25,46 +25,46 @@ import Accelerate
 
 
 // MARK: - Edge detect kernel
-let __f_edgedetect_kernel_3x3: [Float] = [
+fileprivate let __f_edgedetect_kernel_3x3: [Float] = [
 	-1.0, -1.0, -1.0,
 	-1.0, 8.0, -1.0,
 	-1.0, -1.0, -1.0
 ]
 
 // MARK: - Emboss kernel
-let __s_emboss_kernel_3x3: [Int16] = [
+fileprivate let __s_emboss_kernel_3x3: [Int16] = [
 	-2, 0, 0,
 	0, 1, 0,
 	0, 0, 2
 ]
 
 // MARK: - Sharpen kernel
-let __s_sharpen_kernel_3x3: [Int16] = [
+fileprivate let __s_sharpen_kernel_3x3: [Int16] = [
 	-1, -1, -1,
 	-1, 9, -1,
 	-1, -1, -1
 ]
 
 // MARK: - Unsharpen kernel
-let __s_unsharpen_kernel_3x3: [Int16] = [
+fileprivate let __s_unsharpen_kernel_3x3: [Int16] = [
 	-1, -1, -1,
 	-1, 17, -1,
 	-1, -1, -1
 ]
 
 // MARK: - Sepia values for manual filtering
-var __sepiaFactorRedRed: Float = 0.393
-var __sepiaFactorRedGreen: Float = 0.349
-var __sepiaFactorRedBlue: Float = 0.272
-var __sepiaFactorGreenRed: Float = 0.769
-var __sepiaFactorGreenGreen: Float = 0.686
-var __sepiaFactorGreenBlue: Float = 0.534
-var __sepiaFactorBlueRed: Float = 0.189
-var __sepiaFactorBlueGreen: Float = 0.168
-var __sepiaFactorBlueBlue: Float = 0.131
+fileprivate var __sepiaFactorRedRed: Float = 0.393
+fileprivate var __sepiaFactorRedGreen: Float = 0.349
+fileprivate var __sepiaFactorRedBlue: Float = 0.272
+fileprivate var __sepiaFactorGreenRed: Float = 0.769
+fileprivate var __sepiaFactorGreenGreen: Float = 0.686
+fileprivate var __sepiaFactorGreenBlue: Float = 0.534
+fileprivate var __sepiaFactorBlueRed: Float = 0.189
+fileprivate var __sepiaFactorBlueGreen: Float = 0.168
+fileprivate var __sepiaFactorBlueBlue: Float = 0.131
 
 // MARK: -  Negative multiplier to invert a number
-var __negativeMultiplier: Float = -1.0
+fileprivate var __negativeMultiplier: Float = -1.0
 
 
 public extension UIImage
@@ -120,7 +120,8 @@ public extension UIImage
 		}
 
 		let pixelsCount = UInt(width * height)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: Int(pixelsCount))
+		let pixelsCountInt = Int(pixelsCount)
+		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		// Calculate red components
@@ -144,7 +145,7 @@ public extension UIImage
 		vDSP_vfixu8(dataAsFloat, 1, t + 3, 4, pixelsCount)
 
 		// Cleanup
-		dataAsFloat.deallocate(capacity: Int(pixelsCount))
+		dataAsFloat.deallocate(capacity: pixelsCountInt)
 
 		guard let brightenedImageRef = bmContext.makeImage() else
 		{
@@ -178,7 +179,8 @@ public extension UIImage
 		}
 
 		let pixelsCount = UInt(width * height)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: Int(pixelsCount))
+		let pixelsCountInt = Int(pixelsCount)
+		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		// Contrast correction factor
@@ -211,7 +213,7 @@ public extension UIImage
 		vDSP_vfixu8(dataAsFloat, 1, t + 3, 4, pixelsCount)
 
 		// Cleanup
-		dataAsFloat.deallocate(capacity: Int(pixelsCount))
+		dataAsFloat.deallocate(capacity: pixelsCountInt)
 
 		guard let contrastedImageRef = bmContext.makeImage() else
 		{
@@ -244,8 +246,9 @@ public extension UIImage
 		}
 
 		let pixelsCount = UInt(width * height)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: Int(pixelsCount))
-		let resultAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: Int(pixelsCount))
+		let pixelsCountInt = Int(pixelsCount)
+		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let resultAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		// Red components
@@ -268,8 +271,8 @@ public extension UIImage
 		vDSP_vfixu8(resultAsFloat, 1, t + 3, 4, pixelsCount)
 
 		// Cleanup
-		dataAsFloat.deallocate(capacity: Int(pixelsCount))
-		resultAsFloat.deallocate(capacity: Int(pixelsCount))
+		dataAsFloat.deallocate(capacity: pixelsCountInt)
+		resultAsFloat.deallocate(capacity: pixelsCountInt)
 
 		guard let edgedImageRef = bmContext.makeImage() else
 		{
@@ -279,7 +282,7 @@ public extension UIImage
 		return UIImage(cgImage: edgedImageRef, scale: self.scale, orientation: self.imageOrientation)
 	}
 
-	public func embossed(_ bias: UInt = 0) -> UIImage?
+	public func embossed(_ bias: Int32 = 0) -> UIImage?
 	{
 		guard let cgImage = self.cgImage else
 		{
@@ -301,16 +304,16 @@ public extension UIImage
 			return nil
 		}
 
-		let n = width * height * 4
-		let outt = UnsafeMutablePointer<UInt8>.allocate(capacity: n)
+		let size = width * height * numberOfComponentsPerARBGPixel
+		let bufferOut = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
 		let bytesPerRow = width * numberOfComponentsPerARBGPixel
 		var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
-		var dst = vImage_Buffer(data: outt, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
-		vImageConvolveWithBias_ARGB8888(&src, &dst, nil, 0, 0, __s_emboss_kernel_3x3, 3, 3, 1/*divisor*/, Int32(bias), nil, vImage_Flags(kvImageCopyInPlace))
+		var dst = vImage_Buffer(data: bufferOut, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+		vImageConvolveWithBias_ARGB8888(&src, &dst, nil, 0, 0, __s_emboss_kernel_3x3, 3, 3, 1/*divisor*/, bias, nil, vImage_Flags(kvImageCopyInPlace))
 
 		// Cleanup
-		memcpy(data, outt, n)
-		outt.deallocate(capacity: n)
+		memcpy(data, bufferOut, size)
+		bufferOut.deallocate(capacity: size)
 
 		guard let embossImageRef = bmContext.makeImage() else
 		{
@@ -344,9 +347,9 @@ public extension UIImage
 		}
 
 		let pixelsCount = UInt(width * height)
-		let iPixelsCount = Int(pixelsCount)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let temp = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
+		let pixelsCountInt = Int(pixelsCount)
+		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let temp = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		// Need a vector with same size :(
@@ -380,8 +383,8 @@ public extension UIImage
 		vDSP_vfixu8(dataAsFloat, 1, t + 3, 4, pixelsCount)
 
 		// Cleanup
-		temp.deallocate(capacity: iPixelsCount)
-		dataAsFloat.deallocate(capacity: iPixelsCount)
+		temp.deallocate(capacity: pixelsCountInt)
+		dataAsFloat.deallocate(capacity: pixelsCountInt)
 
 		guard let gammaImageRef = bmContext.makeImage() else
 		{
@@ -449,32 +452,29 @@ public extension UIImage
 		}
 
 		// Create an ARGB bitmap context
-		let width = UInt(self.size.width)
-		let height = UInt(self.size.height)
-		guard let bmContext = CGContext.ARGBBitmapContext(width: Int(width), height: Int(height), withAlpha: cgImage.hasAlpha()) else
+		let width = Int(self.size.width)
+		let height = Int(self.size.height)
+		guard let bmContext = CGContext.ARGBBitmapContext(width: width, height: height, withAlpha: cgImage.hasAlpha()) else
 		{
 			return nil
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: Int(width), height: Int(height)))
+		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 		guard let data = bmContext.data else
 		{
 			return nil
 		}
 
 		let pixelsCount = UInt(width * height)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: Int(pixelsCount))
+		let pixelsCountInt = Int(pixelsCount)
+		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		let t: UnsafeMutablePointer<UInt8> = data.assumingMemoryBound(to: UInt8.self)
 		let dataRed = t + 1
 		let dataGreen = t + 2
 		let dataBlue = t + 3
-
-		// vDSP_vsmsa() = multiply then add
-		// slightly faster than the couple vDSP_vneg() & vDSP_vsadd()
-		// Probably because there are 3 function calls less
 
 		// Calculate red components
 		vDSP_vfltu8(dataRed, 4, dataAsFloat, 1, pixelsCount)
@@ -495,7 +495,7 @@ public extension UIImage
 		vDSP_vfixu8(dataAsFloat, 1, dataBlue, 4, pixelsCount)
 
 		// Cleanup
-		dataAsFloat.deallocate(capacity: Int(pixelsCount))
+		dataAsFloat.deallocate(capacity: pixelsCountInt)
 
 		guard let invertedImageRef = bmContext.makeImage() else
 		{
@@ -528,16 +528,16 @@ public extension UIImage
 		}
 
 		let pixelsCount = UInt(width * height)
-		let iPixelsCount = Int(pixelsCount)
-		let reds = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let greens = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let blues = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let tmpRed = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let tmpGreen = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let tmpBlue = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let finalRed = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let finalGreen = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
-		let finalBlue = UnsafeMutablePointer<Float>.allocate(capacity: iPixelsCount)
+		let pixelsCountInt = Int(pixelsCount)
+		let reds = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let greens = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let blues = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let tmpRed = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let tmpGreen = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let tmpBlue = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let finalRed = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let finalGreen = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
+		let finalBlue = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
 		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
 
 		// Convert byte components to float
@@ -574,15 +574,15 @@ public extension UIImage
 		vDSP_vfixu8(finalBlue, 1, t + 3, 4, pixelsCount)
 
 		// Cleanup
-		reds.deallocate(capacity: iPixelsCount)
-		greens.deallocate(capacity: iPixelsCount)
-		blues.deallocate(capacity: iPixelsCount)
-		tmpRed.deallocate(capacity: iPixelsCount)
-		tmpGreen.deallocate(capacity: iPixelsCount)
-		tmpBlue.deallocate(capacity: iPixelsCount)
-		finalRed.deallocate(capacity: iPixelsCount)
-		finalGreen.deallocate(capacity: iPixelsCount)
-		finalBlue.deallocate(capacity: iPixelsCount)
+		reds.deallocate(capacity: pixelsCountInt)
+		greens.deallocate(capacity: pixelsCountInt)
+		blues.deallocate(capacity: pixelsCountInt)
+		tmpRed.deallocate(capacity: pixelsCountInt)
+		tmpGreen.deallocate(capacity: pixelsCountInt)
+		tmpBlue.deallocate(capacity: pixelsCountInt)
+		finalRed.deallocate(capacity: pixelsCountInt)
+		finalGreen.deallocate(capacity: pixelsCountInt)
+		finalBlue.deallocate(capacity: pixelsCountInt)
 
 		guard let sepiaImageRef = bmContext.makeImage() else
 		{
@@ -614,16 +614,16 @@ public extension UIImage
 			return nil
 		}
 
-		let n = width * height * 4
-		let outt = UnsafeMutablePointer<UInt8>.allocate(capacity: n)
+		let size = width * height * numberOfComponentsPerARBGPixel
+		let bufferOut = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
 		let bytesPerRow = width * numberOfComponentsPerARBGPixel
 		var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
-		var dst = vImage_Buffer(data: outt, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+		var dst = vImage_Buffer(data: bufferOut, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
 		vImageConvolveWithBias_ARGB8888(&src, &dst, nil, 0, 0, __s_sharpen_kernel_3x3, 3, 3, 1/*divisor*/, bias, nil, vImage_Flags(kvImageCopyInPlace))
 
 		// Cleanup
-		memcpy(data, outt, n)
-		outt.deallocate(capacity: n)
+		memcpy(data, bufferOut, size)
+		bufferOut.deallocate(capacity: size)
 
 		guard let sharpenedImageRef = bmContext.makeImage() else
 		{
@@ -655,16 +655,16 @@ public extension UIImage
 			return nil
 		}
 
-		let n = width * height * 4
-		let outt = UnsafeMutablePointer<UInt8>.allocate(capacity: n)
+		let size = width * height * numberOfComponentsPerARBGPixel
+		let bufferOut = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
 		let bytesPerRow = width * numberOfComponentsPerARBGPixel
 		var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
-		var dst = vImage_Buffer(data: outt, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+		var dst = vImage_Buffer(data: bufferOut, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
 		vImageConvolveWithBias_ARGB8888(&src, &dst, nil, 0, 0, __s_unsharpen_kernel_3x3, 3, 3, 1/*divisor*/, bias, nil, vImage_Flags(kvImageCopyInPlace))
 
 		// Cleanup
-		memcpy(data, outt, n)
-		outt.deallocate(capacity: n)
+		memcpy(data, bufferOut, size)
+		bufferOut.deallocate(capacity: size)
 
 		guard let unsharpenedImageRef = bmContext.makeImage() else
 		{
