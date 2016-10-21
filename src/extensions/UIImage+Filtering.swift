@@ -25,10 +25,10 @@ import Accelerate
 
 
 // MARK: - Edge detect kernel
-fileprivate let __f_edgedetect_kernel_3x3: [Float] = [
-	-1.0, -1.0, -1.0,
-	-1.0, 8.0, -1.0,
-	-1.0, -1.0, -1.0
+fileprivate let __s_edgedetect_kernel_3x3: [Int16] = [
+	-1, -1, -1,
+	-1, 8, -1,
+	-1, -1, -1
 ]
 
 // MARK: - Emboss kernel
@@ -223,7 +223,7 @@ public extension UIImage
 		return UIImage(cgImage: contrastedImageRef, scale: self.scale, orientation: self.imageOrientation)
 	}
 
-	public func edgeDetected() -> UIImage?
+	public func edgeDetected(_ bias: Int32 = 0) -> UIImage?
 	{
 		guard let cgImage = self.cgImage else
 		{
@@ -231,48 +231,30 @@ public extension UIImage
 		}
 
 		// Create an ARGB bitmap context
-		let width = UInt(self.size.width)
-		let height = UInt(self.size.height)
-		guard let bmContext = CGContext.ARGBBitmapContext(width: Int(width), height: Int(height), withAlpha: cgImage.hasAlpha()) else
+		let width = Int(self.size.width)
+		let height = Int(self.size.height)
+		guard let bmContext = CGContext.ARGBBitmapContext(width: width, height: height, withAlpha: cgImage.hasAlpha()) else
 		{
 			return nil
 		}
 
 		// Get image data
-		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: Int(width), height: Int(height)))
+		bmContext.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
 		guard let data = bmContext.data else
 		{
 			return nil
 		}
 
-		let pixelsCount = UInt(width * height)
-		let pixelsCountInt = Int(pixelsCount)
-		let dataAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
-		let resultAsFloat = UnsafeMutablePointer<Float>.allocate(capacity: pixelsCountInt)
-		var min = Float(minPixelComponentValue), max = Float(maxPixelComponentValue)
-
-		// Red components
-		let t: UnsafeMutablePointer<UInt8> = data.assumingMemoryBound(to: UInt8.self)
-		vDSP_vfltu8(t + 1, 4, dataAsFloat, 1, pixelsCount)
-		vDSP_f3x3(dataAsFloat, height, width, __f_edgedetect_kernel_3x3, resultAsFloat)
-		vDSP_vclip(resultAsFloat, 1, &min, &max, resultAsFloat, 1, pixelsCount)
-		vDSP_vfixu8(resultAsFloat, 1, t + 1, 4, pixelsCount)
-
-		// Green components
-		vDSP_vfltu8(t + 2, 4, dataAsFloat, 1, pixelsCount)
-		vDSP_f3x3(dataAsFloat, height, width, __f_edgedetect_kernel_3x3, resultAsFloat)
-		vDSP_vclip(resultAsFloat, 1, &min, &max, resultAsFloat, 1, pixelsCount)
-		vDSP_vfixu8(resultAsFloat, 1, t + 2, 4, pixelsCount)
-
-		// Blue components
-		vDSP_vfltu8(t + 3, 4, dataAsFloat, 1, pixelsCount)
-		vDSP_f3x3(dataAsFloat, height, width, __f_edgedetect_kernel_3x3, resultAsFloat)
-		vDSP_vclip(resultAsFloat, 1, &min, &max, resultAsFloat, 1, pixelsCount)
-		vDSP_vfixu8(resultAsFloat, 1, t + 3, 4, pixelsCount)
+		let size = width * height * numberOfComponentsPerARBGPixel
+		let bufferOut = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
+		let bytesPerRow = width * numberOfComponentsPerARBGPixel
+		var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+		var dst = vImage_Buffer(data: bufferOut, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+		vImageConvolveWithBias_ARGB8888(&src, &dst, nil, 0, 0, __s_edgedetect_kernel_3x3, 3, 3, 1, bias, nil, vImage_Flags(kvImageCopyInPlace))
 
 		// Cleanup
-		dataAsFloat.deallocate(capacity: pixelsCountInt)
-		resultAsFloat.deallocate(capacity: pixelsCountInt)
+		memcpy(data, bufferOut, size)
+		bufferOut.deallocate(capacity: size)
 
 		guard let edgedImageRef = bmContext.makeImage() else
 		{
