@@ -37,7 +37,7 @@ public extension CGContext
 	public class func ARGBBitmapContext(width: Int, height: Int, withAlpha: Bool) -> CGContext?
 	{
 		let alphaInfo = CGBitmapInfo(rawValue: withAlpha ? CGImageAlphaInfo.premultipliedFirst.rawValue : CGImageAlphaInfo.noneSkipFirst.rawValue)
-		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8/*Bits per component*/, bytesPerRow: width * numberOfComponentsPerARBGPixel/*Bytes per row*/, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: alphaInfo.rawValue)
+		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * numberOfComponentsPerARBGPixel, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: alphaInfo.rawValue)
 		return bmContext
 	}
 
@@ -45,14 +45,14 @@ public extension CGContext
 	public class func RGBABitmapContext(width: Int, height: Int, withAlpha: Bool) -> CGContext?
 	{
 		let alphaInfo = CGBitmapInfo(rawValue: withAlpha ? CGImageAlphaInfo.premultipliedLast.rawValue : CGImageAlphaInfo.noneSkipLast.rawValue)
-		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8/*Bits per component*/, bytesPerRow: width * numberOfComponentsPerRGBAPixel/*Bytes per row*/, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: alphaInfo.rawValue)
+		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * numberOfComponentsPerRGBAPixel, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: alphaInfo.rawValue)
 		return bmContext
 	}
 
 	// MARK: - Gray bitmap context
 	public class func GrayBitmapContext(width: Int, height: Int) -> CGContext?
 	{
-		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8/*Bits per component*/, bytesPerRow: width * numberOfComponentsPerGrayPixel/*Bytes per row*/, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.none.rawValue)
+		let bmContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * numberOfComponentsPerGrayPixel, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.none.rawValue)
 		return bmContext
 	}
 }
