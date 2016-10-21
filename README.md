@@ -1,6 +1,6 @@
 # SwiftyImages
 
-***SwiftyImages*** is the continuation of [NYXImagesKit](https://github.com/Nyx0uf/NYXImagesKit), it's more modern, uses *Swift 3* and requires *iOS 10*.
+***SwiftyImages*** is the continuation of [NYXImagesKit](https://github.com/Nyx0uf/NYXImagesKit), it's more modern, uses *Swift 3* and requires *iOS 9.3*.
 
 It's a framework which regroups a collection of useful *UIImage* extensions to handle common operations such as filtering, blurring, enhancing, masking, reflecting, resizing, rotating, saving. There is also a subclass of *UIImageView* to load an image asynchronously from a URL and display it as it is downloaded.
 
