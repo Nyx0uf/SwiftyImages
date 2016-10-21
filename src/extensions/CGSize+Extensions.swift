@@ -23,22 +23,32 @@
 import CoreGraphics
 
 
-extension CGSize
+public extension CGSize
 {
 	// MARK: - Initializers
-	init(_ width: CGFloat, _ height: CGFloat)
+	public init(_ width: CGFloat, _ height: CGFloat)
 	{
 		self.width = width
 		self.height = height
 	}
 
-	func ceil() -> CGSize
+	public func ceilled() -> CGSize
 	{
 		return CGSize(CoreGraphics.ceil(width), CoreGraphics.ceil(height))
 	}
+
+	public func floored() -> CGSize
+	{
+		return CGSize(CoreGraphics.floor(width), CoreGraphics.floor(height))
+	}
+
+	public func rounded() -> CGSize
+	{
+		return CGSize(CoreGraphics.round(width), CoreGraphics.round(height))
+	}
 }
 
-func * (lhs: CGSize, rhs: CGFloat) -> CGSize
+public func * (lhs: CGSize, rhs: CGFloat) -> CGSize
 {
 	return CGSize(lhs.width * rhs, lhs.height * rhs)
 }

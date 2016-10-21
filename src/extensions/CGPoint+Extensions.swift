@@ -23,17 +23,27 @@
 import CoreGraphics
 
 
-extension CGPoint
+public extension CGPoint
 {
 	// MARK: - Initializers
-	init(_ x: CGFloat, _ y: CGFloat)
+	public init(_ x: CGFloat, _ y: CGFloat)
 	{
 		self.x = x
 		self.y = y
 	}
 
-	func ceil() -> CGPoint
+	public func ceilled() -> CGPoint
 	{
 		return CGPoint(CoreGraphics.ceil(x), CoreGraphics.ceil(y))
+	}
+
+	public func floored() -> CGPoint
+	{
+		return CGPoint(CoreGraphics.floor(x), CoreGraphics.floor(y))
+	}
+
+	public func rounded() -> CGPoint
+	{
+		return CGPoint(CoreGraphics.round(x), CoreGraphics.round(y))
 	}
 }

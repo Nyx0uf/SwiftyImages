@@ -49,7 +49,7 @@ public extension UIImage
 		// Figure out how big an image we need
 		let framesetter = CTFramesetterCreateWithAttributedString(attrString)
 		var osef = CFRange(location:0, length:0)
-		let goodSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, osef, nil, trueMaxSize, &osef).ceil()
+		let goodSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, osef, nil, trueMaxSize, &osef).ceilled()
 		let rect = CGRect((trueMaxSize.width - goodSize.width) * 0.5, (trueMaxSize.height - goodSize.height) * 0.5, goodSize.width, goodSize.height)
 		let path = CGPath(rect: rect, transform: nil)
 		let frame = CTFramesetterCreateFrame(framesetter, CFRange(location:0, length:0), path, nil)
