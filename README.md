@@ -1,13 +1,13 @@
 # SwiftyImages
 
-***SwiftyImages*** is the continuation of [NYXImagesKit](https://github.com/Nyx0uf/NYXImagesKit), it's more modern, uses *Swift 3* and requires *iOS 9.3*.
+***SwiftyImages*** is the continuation of [NYXImagesKit](https://github.com/Nyx0uf/NYXImagesKit), it's more modern, uses *Swift 3* and requires at least *iOS 9.3*.
 
-It's a framework which regroups a collection of useful *UIImage* extensions to handle common operations such as filtering, blurring, enhancing, masking, reflecting, resizing, rotating, saving. There is also a subclass of *UIImageView* to load an image asynchronously from a URL and display it as it is downloaded.
+It's a framework which regroups a collection of useful extensions and classes to interact with images and colors.
 
 
-### UIImage+Filtering
+## UIImage extensions
 
-This category allows you to apply filters on a *UIImage* object, currently there are 11 filters :
+### Filtering
 
 1. Brighten
 2. Contrast adjustment
@@ -20,30 +20,24 @@ This category allows you to apply filters on a *UIImage* object, currently there
 9. Sepia
 10. Sharpen
 11. Unsharpen
+12. Blur
 
 
-### UIImage+Blurring
+### Masking
 
-This category is composed of a single method to blur an *UIImage*. Blurring is done using **vImage**.
+This extension is composed of a single method which allows to mask an image with another one, you just have to create the mask image you desire.
 
-	myImage.gaussianBlurred()
-
-
-### UIImage+Masking
-
-This category is composed of a single method which allows to mask an image with another one, you just have to create the mask image you desire.
-
-	let masked = myImage.masked(withImage: mask)
+	let maskedImage = myImage.masked(withImage: maskImage)
 
 
-### UIImage+Resizing
+### Resizing
 
-This category can be used to crop or to scale images.
+This extension can be used to crop to scale images.
 
 
 #### Cropping
 
-	let cropped = myImage.cropped(toSize: CGSize(width, height))
+	let croppedImage = myImage.cropped(toSize: CGSize(width, height))
 
 You can crop your image by 9 different ways :
 
@@ -62,32 +56,52 @@ You can crop your image by 9 different ways :
 
 You have the choice between two methods to scale images, the two methods will keep the aspect ratio of the original image.
 
-	let scaled1 = myImage.scaled(factor: 0.5)
-	let scaled2 = myImage.scaled(toSize: CGSize(width, height)
+	let scaledImage1 = myImage.scaled(factor: 0.5)
+	let scaledImage2 = myImage.scaled(toSize: CGSize(width, height)
 
 
-### UIImage+Rotating
+### Rotating
 
-With this category you can rotate or flip an *UIImage*, flipping is useful if you want to create a reflect effect.
+With this extension you can rotate, flip or reflect an image.
 
-
-### UIImage+Reflecting
-
-This category allow the creation of a reflected image.
-
-	let reflected = myImage.reflected()
+	let reflectedImage = myImage.reflected()
+	let flippedImage = myImage.horizontallyFlipped()
+	let rotatedImage = myImage.rotated(degrees: 45.0)
 
 
-### UIImage+Saving
+### Saving
 
-This category allows you to save an *UIImage* at a specified path or file URL, there are five types supported :
+This extension allows you to save an image at a specified path or file URL among these format : **BMP**, **GIF**, **JPG**, **PNG**, **TIFF**.
 
-1. BMP
-2. GIF
-3. JPG
-4. PNG
-5. TIFF
+	let success = myImage.save(to: yourURL)
+	let success = myImage.save(toPath: yourPath, type: .jpg)
 
+
+### Creating a gradient image
+
+	let gradient = UIImage.makeGrayGradient(width: width, height: height, fromAlpha: 1.0, toAlpha: 1.0)
+
+
+### Creating an image from a string
+
+	let stringImage = UIImage.makeFromString("SwiftyImages", font: textFont, fontColor: fontColor, backgroundColor: bgColor, maxSize: maxSize)
+
+
+## UIColor extensions
+
+Some utilities to create color from a hexadecimal value, invert a color and more.
+
+
+## CGContext extensions
+
+3 functions to easily get a bitmap context :
+
+	let bmContext = CGContext.ARGBBitmapContext(width: width, height: height, withAlpha: false)
+	let bmContext = CGContext.RGBABitmapContext(width: width, height: height, withAlpha: true)
+	let bmContext = CGContext.GrayBitmapContext(width: width, height: height)
+
+
+## Classes
 
 ### NYXProgressiveImageView
 
@@ -95,8 +109,19 @@ This is a subclass of *UIImageView* to load asynchronously an image from an URL 
 For more informations see <https://cocoaintheshell.whine.fr/2012/01/nyximageskit-class-nyxprogressiveimageview/> and <https://cocoaintheshell.whine.fr/2011/05/progressive-images-download-imageio/>.
 
 
+### KawaiiColors
+
+Class to match colors like iTunes 11.
+
+	let analyzer = KawaiiColors(image: myImage)
+	analyzer.analyze()
+	//analyzer.edgeColor
+	//analyzer.dominantColor
+	//analyzer.primaryColor
+	//analyzer.secondaryColor
+	//analyzer.thirdColor
+
+
 ### LICENSE
 
 **SwiftyImages** is released under the MIT License, see LICENSE file.
-
-Twitter : @Nyx0uf
