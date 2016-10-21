@@ -272,7 +272,7 @@ extension NYXProgressiveImageView : URLSessionDelegate
 }
 
 // MARK: - Static
-extension NYXProgressiveImageView
+public extension NYXProgressiveImageView
 {
 	public class func cachesDirectoryURL() -> URL?
 	{
