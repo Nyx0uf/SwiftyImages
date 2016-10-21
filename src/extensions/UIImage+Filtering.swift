@@ -393,7 +393,6 @@ public extension UIImage
 
 	public func grayscaled() -> UIImage?
 	{
-		/* const UInt8 luminance = (red * 0.2126) + (green * 0.7152) + (blue * 0.0722); // Good luminance value */
 		guard let cgImage = self.cgImage else
 		{
 			return nil
