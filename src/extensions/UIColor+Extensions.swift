@@ -59,6 +59,21 @@ public extension UIColor
 		return UIColor(red: 1.0 - r, green: 1.0 - g, blue: 1.0 - b, alpha: 1.0)
 	}
 
+	func isBlackOrWhite() -> Bool
+	{
+		var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
+		getRed(&r, green: &g, blue: &b, alpha: &a)
+		if (r > 0.91 && g > 0.91 && b > 0.91)
+		{
+			return true // white
+		}
+		if (r < 0.09 && g < 0.09 && b < 0.09)
+		{
+			return true // black
+		}
+		return false
+	}
+
 	public func isContrasting(fromColor color: UIColor) -> Bool
 	{
 		var r1: CGFloat = 0.0, g1: CGFloat = 0.0, b1: CGFloat = 0.0, a1: CGFloat = 0.0

@@ -1,4 +1,4 @@
-// Common.swift
+// CountedObject.swift
 // Copyright (c) 2016 Nyx0uf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,31 +20,21 @@
 // THE SOFTWARE.
 
 
-import UIKit
+import Foundation
 
 
-// MARK: Helper functions
-public func exifOrientationToUIImageOrientation(_ exifOrientation: Int) -> UIImageOrientation
+final class CountedObject<T>
 {
-	switch (exifOrientation)
+	// MARK: - Public properties
+	// Object
+	var object: T
+	// Count of object
+	var count: UInt
+
+	// MARK: - Initializers
+	init(object: T, count: UInt)
 	{
-		case 1:
-			return .up
-		case 3:
-			return .down
-		case 8:
-			return .left
-		case 6:
-			return .right
-		case 2:
-			return .upMirrored
-		case 4:
-			return .downMirrored
-		case 5:
-			return .leftMirrored
-		case 7:
-			return .rightMirrored
-		default:
-			return .up
+		self.object = object
+		self.count = count
 	}
 }

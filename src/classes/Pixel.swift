@@ -1,4 +1,4 @@
-// Common.swift
+// Pixel.swift
 // Copyright (c) 2016 Nyx0uf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,31 +20,48 @@
 // THE SOFTWARE.
 
 
-import UIKit
+import Foundation
 
 
-// MARK: Helper functions
-public func exifOrientationToUIImageOrientation(_ exifOrientation: Int) -> UIImageOrientation
+
+// MARK: - Public constants
+public let numberOfComponentsPerARBGPixel = 4
+public let numberOfComponentsPerRGBAPixel = 4
+public let numberOfComponentsPerGrayPixel = 3
+public let minPixelComponentValue = UInt8(0)
+public let maxPixelComponentValue = UInt8(255)
+
+
+// MARK: - RGBA Pixel struct
+public struct RGBAPixel
 {
-	switch (exifOrientation)
+	public var r: UInt8
+	public var g: UInt8
+	public var b: UInt8
+	public var a: UInt8
+
+	public init(r: UInt8, g: UInt8, b: UInt8, a: UInt8)
 	{
-		case 1:
-			return .up
-		case 3:
-			return .down
-		case 8:
-			return .left
-		case 6:
-			return .right
-		case 2:
-			return .upMirrored
-		case 4:
-			return .downMirrored
-		case 5:
-			return .leftMirrored
-		case 7:
-			return .rightMirrored
-		default:
-			return .up
+		self.r = r
+		self.g = g
+		self.b = b
+		self.a = a
+	}
+}
+
+// MARK: - ARGB Pixel struct
+public struct ARGBPixel
+{
+	public var a: UInt8
+	public var r: UInt8
+	public var g: UInt8
+	public var b: UInt8
+
+	public init(a: UInt8, r: UInt8, g: UInt8, b: UInt8)
+	{
+		self.a = a
+		self.r = r
+		self.g = g
+		self.b = b
 	}
 }
