@@ -57,7 +57,7 @@ public extension UIImage
 			return nil
 		}
 
-		let bytesPerRow = width * numberOfComponentsPerARBGPixel;
+		let bytesPerRow = width * numberOfComponentsPerARBGPixel
 		let n = MemoryLayout<UInt8>.size * width * height * 4
 		let outt = UnsafeMutablePointer<UInt8>.allocate(capacity: n)
 		var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
