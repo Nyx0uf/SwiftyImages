@@ -39,7 +39,7 @@ public class NYXProgressiveImageView : UIImageView
 	// Downloading flag
 	public fileprivate(set) var isDownloading: Bool = false
 	// Enable / Disable caching
-	public var isCaching: Bool = true
+	public var isCaching: Bool = false
 	// Timeout
 	public var timeoutInterval: TimeInterval = 10.0
 
@@ -59,7 +59,7 @@ public class NYXProgressiveImageView : UIImageView
 		return cfg
 	}
 	// Session
-	private var _localURLSession: URLSession {
+	private var _localURLSession: Foundation.URLSession {
 		return Foundation.URLSession(configuration:_localURLSessionConfiguration, delegate:self, delegateQueue:nil)
 	}
 	// Image source for progressive display
@@ -173,7 +173,7 @@ public class NYXProgressiveImageView : UIImageView
 // MARK: - NSURLSessionDelegate
 extension NYXProgressiveImageView : URLSessionDelegate
 {
-	fileprivate func URLSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceiveResponse response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void)
+	func URLSession(_ session: Foundation.URLSession, dataTask: URLSessionDataTask, didReceiveResponse response: URLResponse, completionHandler: (Foundation.URLSession.ResponseDisposition) -> Void)
 	{
 		isDownloading = true
 		_imageSource = CGImageSourceCreateIncremental(nil)
@@ -185,7 +185,7 @@ extension NYXProgressiveImageView : URLSessionDelegate
 		completionHandler(.allow)
 	}
 
-	fileprivate func URLSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceiveData data: Data)
+	func URLSession(_ session: Foundation.URLSession, dataTask: URLSessionDataTask, didReceiveData data: Data)
 	{
 		_incomingData.append(data)
 
@@ -231,7 +231,7 @@ extension NYXProgressiveImageView : URLSessionDelegate
 		}
 	}
 
-	fileprivate func URLSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?)
+	func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?)
 	{
 		if error == nil && _incomingData != nil && _incomingData.count > 0
 		{
