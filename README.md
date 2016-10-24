@@ -5,7 +5,7 @@
 It's a framework which regroups a collection of useful extensions and classes to interact with images and colors.
 
 
-## UIImage extensions
+## UIImage / CGImage extensions
 
 ### Filtering
 
@@ -75,6 +75,13 @@ This extension allows you to save an image at a specified path or file URL among
 
 	let success = myImage.save(to: yourURL)
 	let success = myImage.save(toPath: yourPath, type: .jpg)
+
+
+### Operator overloading
+
+You can combine images using the `+` operator, it's a top composition.
+
+	let combinedImage = img1 + img2
 
 
 ### Creating a gradient image

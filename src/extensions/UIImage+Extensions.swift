@@ -1,4 +1,4 @@
-// UIImage+Misc.swift
+// UIImage+Extensions.swift
 // Copyright (c) 2016 Nyx0uf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -84,4 +84,31 @@ public extension UIImage
 			return image
 		}
 	}
+}
+
+// MARK: - Operators
+public func + (lhs: UIImage, rhs: UIImage) -> UIImage?
+{
+	UIGraphicsBeginImageContextWithOptions(lhs.size, false, lhs.scale)
+
+	let lhsRect = CGRect(.zero, lhs.size)
+	var rhsRect = CGRect(.zero, rhs.size)
+
+	if lhsRect.contains(rhsRect)
+	{
+		rhsRect.x = (lhsRect.width - rhsRect.width) / 2
+		rhsRect.y = (lhsRect.height - rhsRect.height) / 2
+	}
+	else
+	{
+		rhsRect.size = lhsRect.size
+	}
+
+	lhs.draw(in: lhsRect)
+	rhs.draw(in: rhsRect)
+
+	let image = UIGraphicsGetImageFromCurrentImageContext()
+	UIGraphicsEndImageContext()
+
+	return image
 }

@@ -11,6 +11,12 @@
 		430912D31DBA192F004AE8FA /* KawaiiColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430912D21DBA192F004AE8FA /* KawaiiColors.swift */; };
 		430912D51DBA1988004AE8FA /* CountedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430912D41DBA1988004AE8FA /* CountedObject.swift */; };
 		430912D71DBA1BBC004AE8FA /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430912D61DBA1BBC004AE8FA /* Pixel.swift */; };
+		4349CE511DBA64FE00F2C8CC /* CGImage+Blurring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE4A1DBA64FE00F2C8CC /* CGImage+Blurring.swift */; };
+		4349CE521DBA64FE00F2C8CC /* CGImage+Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE4B1DBA64FE00F2C8CC /* CGImage+Filtering.swift */; };
+		4349CE531DBA64FE00F2C8CC /* CGImage+Masking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE4C1DBA64FE00F2C8CC /* CGImage+Masking.swift */; };
+		4349CE551DBA64FE00F2C8CC /* CGImage+Resizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE4E1DBA64FE00F2C8CC /* CGImage+Resizing.swift */; };
+		4349CE561DBA64FE00F2C8CC /* CGImage+Rotating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE4F1DBA64FE00F2C8CC /* CGImage+Rotating.swift */; };
+		4349CE571DBA64FE00F2C8CC /* CGImage+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349CE501DBA64FE00F2C8CC /* CGImage+Saving.swift */; };
 		43581BFB1DB947C80008A989 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */; };
 		43581BFC1DB947C80008A989 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BF91DB947C80008A989 /* CGRect+Extensions.swift */; };
 		43581BFD1DB947C80008A989 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */; };
@@ -23,7 +29,7 @@
 		4391E3371DB920CD003A567B /* UIImage+Blurring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3261DB920CD003A567B /* UIImage+Blurring.swift */; };
 		4391E3381DB920CD003A567B /* UIImage+Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3271DB920CD003A567B /* UIImage+Filtering.swift */; };
 		4391E3391DB920CD003A567B /* UIImage+Masking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3281DB920CD003A567B /* UIImage+Masking.swift */; };
-		4391E33A1DB920CD003A567B /* UIImage+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3291DB920CD003A567B /* UIImage+Misc.swift */; };
+		4391E33A1DB920CD003A567B /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E3291DB920CD003A567B /* UIImage+Extensions.swift */; };
 		4391E33C1DB920CD003A567B /* UIImage+Resizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */; };
 		4391E33D1DB920CD003A567B /* UIImage+Rotating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */; };
 		4391E33E1DB920CD003A567B /* UIImage+Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391E32D1DB920CD003A567B /* UIImage+Saving.swift */; };
@@ -38,6 +44,12 @@
 		430912D21DBA192F004AE8FA /* KawaiiColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KawaiiColors.swift; sourceTree = "<group>"; };
 		430912D41DBA1988004AE8FA /* CountedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountedObject.swift; sourceTree = "<group>"; };
 		430912D61DBA1BBC004AE8FA /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		4349CE4A1DBA64FE00F2C8CC /* CGImage+Blurring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Blurring.swift"; sourceTree = "<group>"; };
+		4349CE4B1DBA64FE00F2C8CC /* CGImage+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Filtering.swift"; sourceTree = "<group>"; };
+		4349CE4C1DBA64FE00F2C8CC /* CGImage+Masking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Masking.swift"; sourceTree = "<group>"; };
+		4349CE4E1DBA64FE00F2C8CC /* CGImage+Resizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Resizing.swift"; sourceTree = "<group>"; };
+		4349CE4F1DBA64FE00F2C8CC /* CGImage+Rotating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Rotating.swift"; sourceTree = "<group>"; };
+		4349CE501DBA64FE00F2C8CC /* CGImage+Saving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Saving.swift"; sourceTree = "<group>"; };
 		43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		43581BF91DB947C80008A989 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
@@ -52,7 +64,7 @@
 		4391E3261DB920CD003A567B /* UIImage+Blurring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurring.swift"; sourceTree = "<group>"; };
 		4391E3271DB920CD003A567B /* UIImage+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Filtering.swift"; sourceTree = "<group>"; };
 		4391E3281DB920CD003A567B /* UIImage+Masking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Masking.swift"; sourceTree = "<group>"; };
-		4391E3291DB920CD003A567B /* UIImage+Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Misc.swift"; sourceTree = "<group>"; };
+		4391E3291DB920CD003A567B /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resizing.swift"; sourceTree = "<group>"; };
 		4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotating.swift"; sourceTree = "<group>"; };
 		4391E32D1DB920CD003A567B /* UIImage+Saving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Saving.swift"; sourceTree = "<group>"; };
@@ -76,6 +88,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4349CE481DBA64A400F2C8CC /* CGImage */ = {
+			isa = PBXGroup;
+			children = (
+				4349CE4A1DBA64FE00F2C8CC /* CGImage+Blurring.swift */,
+				4391E3241DB920CD003A567B /* CGImage+Extensions.swift */,
+				4349CE4B1DBA64FE00F2C8CC /* CGImage+Filtering.swift */,
+				4349CE4C1DBA64FE00F2C8CC /* CGImage+Masking.swift */,
+				4349CE4E1DBA64FE00F2C8CC /* CGImage+Resizing.swift */,
+				4349CE4F1DBA64FE00F2C8CC /* CGImage+Rotating.swift */,
+				4349CE501DBA64FE00F2C8CC /* CGImage+Saving.swift */,
+			);
+			name = CGImage;
+			sourceTree = "<group>";
+		};
+		4349CE491DBA64AC00F2C8CC /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				4391E3261DB920CD003A567B /* UIImage+Blurring.swift */,
+				4391E3291DB920CD003A567B /* UIImage+Extensions.swift */,
+				4391E3271DB920CD003A567B /* UIImage+Filtering.swift */,
+				4391E3281DB920CD003A567B /* UIImage+Masking.swift */,
+				4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */,
+				4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */,
+				4391E32D1DB920CD003A567B /* UIImage+Saving.swift */,
+			);
+			name = UIImage;
+			sourceTree = "<group>";
+		};
 		4391E3061DB9209D003A567B = {
 			isa = PBXGroup;
 			children = (
@@ -127,20 +167,14 @@
 		4391E3221DB920CD003A567B /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4349CE481DBA64A400F2C8CC /* CGImage */,
+				4349CE491DBA64AC00F2C8CC /* UIImage */,
 				4391E3231DB920CD003A567B /* CGContext+Extensions.swift */,
-				4391E3241DB920CD003A567B /* CGImage+Extensions.swift */,
 				43581BF81DB947C80008A989 /* CGPoint+Extensions.swift */,
 				43581BF91DB947C80008A989 /* CGRect+Extensions.swift */,
 				43581BFA1DB947C80008A989 /* CGSize+Extensions.swift */,
 				4391E3251DB920CD003A567B /* String+Extensions.swift */,
 				43581BFE1DB95CF00008A989 /* UIColor+Extensions.swift */,
-				4391E3261DB920CD003A567B /* UIImage+Blurring.swift */,
-				4391E3271DB920CD003A567B /* UIImage+Filtering.swift */,
-				4391E3281DB920CD003A567B /* UIImage+Masking.swift */,
-				4391E3291DB920CD003A567B /* UIImage+Misc.swift */,
-				4391E32B1DB920CD003A567B /* UIImage+Resizing.swift */,
-				4391E32C1DB920CD003A567B /* UIImage+Rotating.swift */,
-				4391E32D1DB920CD003A567B /* UIImage+Saving.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -235,21 +269,27 @@
 				4391E3361DB920CD003A567B /* String+Extensions.swift in Sources */,
 				43581BFD1DB947C80008A989 /* CGSize+Extensions.swift in Sources */,
 				430912D51DBA1988004AE8FA /* CountedObject.swift in Sources */,
+				4349CE561DBA64FE00F2C8CC /* CGImage+Rotating.swift in Sources */,
 				430912D11DBA1532004AE8FA /* Common.swift in Sources */,
 				4391E3331DB920CD003A567B /* NYXProgressiveImageView.swift in Sources */,
+				4349CE511DBA64FE00F2C8CC /* CGImage+Blurring.swift in Sources */,
 				430912D71DBA1BBC004AE8FA /* Pixel.swift in Sources */,
 				43581BFC1DB947C80008A989 /* CGRect+Extensions.swift in Sources */,
 				4391E3341DB920CD003A567B /* CGContext+Extensions.swift in Sources */,
 				430912D31DBA192F004AE8FA /* KawaiiColors.swift in Sources */,
 				4391E33C1DB920CD003A567B /* UIImage+Resizing.swift in Sources */,
+				4349CE521DBA64FE00F2C8CC /* CGImage+Filtering.swift in Sources */,
 				4391E33F1DB920CD003A567B /* MathUtilities.swift in Sources */,
 				4391E3391DB920CD003A567B /* UIImage+Masking.swift in Sources */,
 				4391E3351DB920CD003A567B /* CGImage+Extensions.swift in Sources */,
 				4391E33E1DB920CD003A567B /* UIImage+Saving.swift in Sources */,
-				4391E33A1DB920CD003A567B /* UIImage+Misc.swift in Sources */,
+				4349CE571DBA64FE00F2C8CC /* CGImage+Saving.swift in Sources */,
+				4391E33A1DB920CD003A567B /* UIImage+Extensions.swift in Sources */,
 				4391E3381DB920CD003A567B /* UIImage+Filtering.swift in Sources */,
 				4391E33D1DB920CD003A567B /* UIImage+Rotating.swift in Sources */,
 				43581BFF1DB95CF00008A989 /* UIColor+Extensions.swift in Sources */,
+				4349CE551DBA64FE00F2C8CC /* CGImage+Resizing.swift in Sources */,
+				4349CE531DBA64FE00F2C8CC /* CGImage+Masking.swift in Sources */,
 				4391E3371DB920CD003A567B /* UIImage+Blurring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,17 +399,37 @@
 		4391E3191DB9209D003A567B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = rsrc/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whine.SwiftyImages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -378,17 +438,37 @@
 		4391E31A1DB9209D003A567B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = rsrc/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.whine.SwiftyImages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};

@@ -23,27 +23,6 @@
 import UIKit
 
 
-public enum NYXCropMode
-{
-	case topLeft
-	case topCenter
-	case topRight
-	case bottomLeft
-	case bottomCenter
-	case bottomRight
-	case leftCenter
-	case rightCenter
-	case center
-}
-
-public enum NYXScaleMode
-{
-	case scaleToFill
-	case aspectFit
-	case aspectFill
-}
-
-
 public extension UIImage
 {
 	// MARK: - Cropping
@@ -124,8 +103,8 @@ public extension UIImage
 			return nil
 		}
 
-		let sourceWidth = size.width * scale
-		let sourceHeight = size.height * scale
+		let sourceWidth = self.size.width * self.scale
+		let sourceHeight = self.size.height * self.scale
 		let targetWidth = toSize.width
 		let targetHeight = toSize.height
 
@@ -167,7 +146,7 @@ public extension UIImage
 				{
 					return
 				}
-				let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: imageOrientation)
+				let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: self.imageOrientation)
 				image.draw(in: destRect) // the actual scaling happens here, and orientation is taken care of automatically
 			}
 		}
@@ -178,7 +157,7 @@ public extension UIImage
 			{
 				return nil
 			}
-			let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: imageOrientation)
+			let image = UIImage(cgImage: sourceImg, scale: 0.0, orientation: self.imageOrientation)
 			image.draw(in: destRect) // the actual scaling happens here, and orientation is taken care of automatically
 			let final = UIGraphicsGetImageFromCurrentImageContext()
 			UIGraphicsEndImageContext()

@@ -21,100 +21,63 @@
 
 
 import UIKit
-import ImageIO
-import MobileCoreServices
 
-
-public enum NYXImageType
-{
-	case png
-	case jpeg
-	case gif
-	case bmp
-	case tiff
-}
 
 public extension UIImage
 {
 	// MARK: - URL style
 	public func save(to url: URL) -> Bool
 	{
-		return self.saveTo(url: url, utiString: self.utiForImageType(.jpeg), backgroundFillColor: nil)
+		guard let ret = self.cgImage?.save(to: url) else
+		{
+			return false
+		}
+		return ret
 	}
 
 	public func save(to url: URL, type: NYXImageType) -> Bool
 	{
-		return self.saveTo(url: url, utiString: self.utiForImageType(type), backgroundFillColor: nil)
+		guard let ret = self.cgImage?.save(to: url, type: type) else
+		{
+			return false
+		}
+		return ret
 	}
 
 	public func save(to url: URL, type: NYXImageType, backgroundFillColor: UIColor) -> Bool
 	{
-		return self.saveTo(url: url, utiString: self.utiForImageType(type), backgroundFillColor: backgroundFillColor)
+		guard let ret = self.cgImage?.save(to: url, type: type, backgroundFillColor: backgroundFillColor) else
+		{
+			return false
+		}
+		return ret
 	}
 
 	// MARK: - Paths style
 	public func save(toPath path: String) -> Bool
 	{
-		let url = URL(fileURLWithPath: path)
-		return self.saveTo(url: url, utiString: self.utiForImageType(.jpeg), backgroundFillColor: nil)
+		guard let ret = self.cgImage?.save(toPath: path) else
+		{
+			return false
+		}
+		return ret
 	}
 
 	public func save(toPath path: String, type: NYXImageType) -> Bool
 	{
-		let url = URL(fileURLWithPath: path)
-		return self.saveTo(url: url, utiString: self.utiForImageType(type), backgroundFillColor: nil)
+		guard let ret = self.cgImage?.save(toPath: path, type: type) else
+		{
+			return false
+		}
+		return ret
 	}
 
 	public func save(toPath path: String, type: NYXImageType, backgroundFillColor: UIColor?) -> Bool
 	{
-		let url = URL(fileURLWithPath: path)
-		return self.saveTo(url: url, utiString: self.utiForImageType(type), backgroundFillColor: backgroundFillColor)
-	}
-
-	// MARK: - Private
-	private func saveTo(url: URL, utiString: CFString, backgroundFillColor: UIColor?) -> Bool
-	{
-		guard let cgImage = self.cgImage else
+		guard let ret = self.cgImage?.save(toPath: path, type: type, backgroundFillColor: backgroundFillColor) else
 		{
 			return false
 		}
-
-		guard let dest = CGImageDestinationCreateWithURL(url as CFURL, utiString as CFString, 1, nil) else
-		{
-			return false
-		}
-
-		// Set the options, 1 -> lossless
-		var options = [String : Any]()
-		options[kCGImageDestinationLossyCompressionQuality as String] = 1.0
-		if let bgColor = backgroundFillColor
-		{
-			options[kCGImageDestinationBackgroundColor as String] = bgColor
-		}
-
-		// Add the image
-		CGImageDestinationAddImage(dest, cgImage, options as CFDictionary?)
-
-		// Write it to the destination
-		return CGImageDestinationFinalize(dest)
-	}
-
-	private func utiForImageType(_ type: NYXImageType) -> CFString
-	{
-		var uti = kUTTypeJPEG
-		switch (type)
-		{
-			case .bmp:
-				uti = kUTTypeBMP
-			case .jpeg:
-				uti = kUTTypeJPEG
-			case .png:
-				uti = kUTTypePNG
-			case .tiff:
-				uti = kUTTypeTIFF
-			case .gif:
-				uti = kUTTypeGIF
-		}
-		return uti
+		return ret
 	}
 }

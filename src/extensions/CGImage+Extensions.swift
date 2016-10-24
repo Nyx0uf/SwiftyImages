@@ -20,7 +20,8 @@
 // THE SOFTWARE.
 
 
-import UIKit
+import CoreGraphics
+import Foundation
 
 
 // MARK: - Image generators

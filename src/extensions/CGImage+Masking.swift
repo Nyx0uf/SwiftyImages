@@ -1,4 +1,4 @@
-// UIImage+Masking.swift
+// CGImage+Masking.swift
 // Copyright (c) 2016 Nyx0uf
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,23 +20,44 @@
 // THE SOFTWARE.
 
 
-import UIKit
+import CoreGraphics
 
 
-public extension UIImage
+public extension CGImage
 {
-	public func masked(withImage maskImage: UIImage) -> UIImage?
+	public func masked(withImage maskImage: CGImage) -> CGImage?
 	{
-		guard let maskedImageRef = maskImage.cgImage else
+		// Create an ARGB bitmap context
+		let originalWidth = self.width
+		let originalHeight = self.height
+		guard let bmContext = CGContext.ARGBBitmapContext(width: originalWidth, height: originalHeight, withAlpha: true) else
 		{
 			return nil
 		}
 
-		guard let final = self.cgImage?.masked(withImage: maskedImageRef) else
+		// Image quality
+		bmContext.setShouldAntialias(true)
+		bmContext.setAllowsAntialiasing(true)
+		bmContext.interpolationQuality = .high
+
+		// Image mask
+		guard let mask = CGImage(maskWidth: maskImage.width, height: maskImage.height, bitsPerComponent: maskImage.bitsPerComponent, bitsPerPixel: maskImage.bitsPerPixel, bytesPerRow: maskImage.bytesPerRow, provider: maskImage.dataProvider!, decode: nil, shouldInterpolate: false) else
 		{
 			return nil
 		}
 
-		return UIImage(cgImage: final, scale: self.scale, orientation: self.imageOrientation)
+		// Draw the original image in the bitmap context
+		let r = CGRect(0, 0, originalWidth, originalHeight)
+		bmContext.clip(to: r, mask: maskImage)
+		bmContext.draw(self, in: r)
+
+		// Get the CGImage object
+		guard let imageRefWithAlpha = bmContext.makeImage() else
+		{
+			return nil
+		}
+
+		// Apply the mask
+		return imageRefWithAlpha.masking(mask)
 	}
 }
