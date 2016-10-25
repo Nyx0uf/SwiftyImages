@@ -49,6 +49,11 @@ public struct RGBAPixel
 	}
 }
 
+func == (lhs: RGBAPixel, rhs: RGBAPixel) -> Bool
+{
+	return (lhs.r == rhs.r) && (lhs.g == rhs.g) && (lhs.b == rhs.b) && (lhs.a == rhs.a)
+}
+
 // MARK: - ARGB Pixel struct
 public struct ARGBPixel
 {
@@ -64,4 +69,9 @@ public struct ARGBPixel
 		self.g = g
 		self.b = b
 	}
+}
+
+func == (lhs: ARGBPixel, rhs: ARGBPixel) -> Bool
+{
+	return (lhs.r == rhs.r) && (lhs.g == rhs.g) && (lhs.b == rhs.b) && (lhs.a == rhs.a)
 }

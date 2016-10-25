@@ -132,3 +132,8 @@ public extension UIColor
 		return false
 	}
 }
+
+public prefix func ~(color: UIColor) -> UIColor
+{
+	return color.inverted()
+}
