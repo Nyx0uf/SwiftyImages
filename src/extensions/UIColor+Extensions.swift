@@ -25,18 +25,70 @@ import UIKit
 
 public extension UIColor
 {
-	// MARK: - Static
-	public class func fromRGBA(_ RGB: Int32, alpha: CGFloat) -> UIColor
+	// MARK: - Initializers
+	public convenience init(rgb: Int32, alpha: CGFloat)
 	{
-		let red = ((CGFloat)((RGB & 0xFF0000) >> 16)) / 255
-		let green = ((CGFloat)((RGB & 0xFF00) >> 8)) / 255
-		let blue = ((CGFloat)(RGB & 0xFF)) / 255
-		return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+		let red = ((CGFloat)((rgb & 0xFF0000) >> 16)) / 255
+		let green = ((CGFloat)((rgb & 0x00FF00) >> 8)) / 255
+		let blue = ((CGFloat)(rgb & 0x0000FF)) / 255
+
+		self.init(red: red, green: green, blue: blue, alpha: alpha)
 	}
 
-	public class func fromRGB(_ RGB: Int32) -> UIColor
+	public convenience init(rgb: Int32)
 	{
-		return UIColor.fromRGBA(RGB, alpha: 1.0)
+		self.init(rgb: rgb, alpha: 1.0)
+	}
+
+	public convenience init(hexString: String, defaultColor: UIColor)
+	{
+		if hexString.hasPrefix("#") == false
+		{
+			self.init(cgColor: defaultColor.cgColor)
+			return
+		}
+
+		let start = hexString.index(hexString.startIndex, offsetBy: 1)
+		let hexColor = hexString.substring(from: start)
+
+		if hexColor.characters.count == 8
+		{
+			let scanner = Scanner(string: hexColor)
+			var hexNumber: UInt64 = 0
+
+			if scanner.scanHexInt64(&hexNumber)
+			{
+				let red = CGFloat((hexNumber & 0xFF000000) >> 24) / 255
+				let green = CGFloat((hexNumber & 0x00FF0000) >> 16) / 255
+				let blue = CGFloat((hexNumber & 0x0000FF00) >> 8) / 255
+				let alpha = CGFloat(hexNumber & 0x000000FF) / 255
+
+				self.init(red: red, green: green, blue: blue, alpha: alpha)
+				return
+			}
+		}
+		else if hexColor.characters.count == 6
+		{
+			let scanner = Scanner(string: hexColor)
+			var hexNumber: UInt32 = 0
+
+			if scanner.scanHexInt32(&hexNumber)
+			{
+				let red = CGFloat((hexNumber & 0xFF0000) >> 16) / 255
+				let green = CGFloat((hexNumber & 0x00FF00) >> 8) / 255
+				let blue = CGFloat((hexNumber & 0x0000FF)) / 255
+
+				self.init(red: red, green: green, blue: blue, alpha: 1.0)
+				return
+			}
+		}
+
+		self.init(cgColor: defaultColor.cgColor)
+	}
+
+	public convenience init(hexString: String)
+	{
+		self.init(hexString: hexString, defaultColor: .clear)
 	}
 
 	public func colorWithMinimumSaturation(_ minSaturation: CGFloat) -> UIColor
@@ -130,6 +182,17 @@ public extension UIColor
 		}
 
 		return false
+	}
+
+	func toHexadecimalStringRepresentation() -> String
+	{
+		var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
+
+		getRed(&r, green: &g, blue: &b, alpha: &a)
+
+		let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255)
+
+		return String(format: "#%06x", rgb)
 	}
 }
 
