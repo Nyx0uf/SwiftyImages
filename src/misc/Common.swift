@@ -24,7 +24,7 @@ import UIKit
 
 
 // MARK: Helper functions
-public func exifOrientationToUIImageOrientation(_ exifOrientation: Int) -> UIImageOrientation
+public func exifOrientationToUIImageOrientation(_ exifOrientation: Int) -> UIImage.Orientation
 {
 	switch (exifOrientation)
 	{

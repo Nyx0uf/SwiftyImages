@@ -71,7 +71,7 @@ public class NYXProgressiveImageView : UIImageView
 	// Expected image size
 	fileprivate var _expectedSize: Int64 = 0
 	// Image orientation
-	fileprivate var _imageOrientation: UIImageOrientation = .up
+    fileprivate var _imageOrientation: UIImage.Orientation = .up
 
 	// MARK: - Initializers
 	override public init(frame: CGRect)

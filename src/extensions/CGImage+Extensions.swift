@@ -53,7 +53,7 @@ public extension CGImage
 		let paragraphStyle = NSMutableParagraphStyle()
 		paragraphStyle.lineBreakMode = .byWordWrapping
 		paragraphStyle.alignment = .center
-		let attributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : fontColor, NSParagraphStyleAttributeName : paragraphStyle]
+        let attributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : fontColor, NSAttributedString.Key.paragraphStyle : paragraphStyle]
 		let attrString = NSAttributedString(string:string, attributes:attributes)
 		let scale = UIScreen.main.scale
 		let trueMaxSize = maxSize * scale
